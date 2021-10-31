@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>구구단</title>
+	<style>
+		.box1{
+			border-radius: 10px;
+			border: 2px solid #73AD21;
+			background-color: #73AD21;
+			padding: 10px;
+			margin: 10px;
+			width: 400px;
+			height: 20px;
+			color: white;
+			text-align: center;
+		}
+		.box2{
+			margin: 10px;
+		}
+
+		#msg{
+			border: 1px solid #73AD21;
+			margin: 10px;
+			width: 400px;
+			height: 300px;
+			padding: 10px;
+			text-align: center;
+		}
+
+		.rdan{
+			font-size: 40px;
+			margin-top: 80px;
+			text-align: center;
+		}
+	</style>
+
+	<script>
+		function showDan(){
+			//단 선택 확인
+			if (myform.dan.value == "") {
+				alert("단을 선택하세요");
+				myform.dan.focus();
+				return;
+			}
+
+			//구구단 출력
+			var dan = parseInt(myform.dan.value);
+			var str = "";
+
+	
+			/*
+			for(var i=1; i<=9; i++){
+				str = str + dan + " x " + i + " = " + (dan * i) + "<br>";
+			}
+			*/
+
+			var i = 1;
+			while(i<=9){
+				str = str + dan + " x " + i + " = " + (dan * i) + "<br>";
+				i++;
+			}
+
+			document.getElementById("msg").innerHTML = str;
+		}
+
+		function showRandom(){
+			//2~9 랜덤 생성
+			var dan = Math.floor(Math.random()*8)+2;
+			//1~9 랜덤 생성
+			var i = Math.floor(Math.random()*8)+1;
+
+			var str = "";
+			//html 태그 그대로 적용
+			str = str + "<h1 class = 'rdan'>" + dan + " x " + i + " = " + (dan * i) + "</h1>" + "<br>";
+			document.getElementById("msg").innerHTML = str;
+		}
+
+		function clearDan(){
+			myform.reset();
+			document.getElementById("msg").innerHTML = "";
+		}
+	</script>
+</head>
+<body>
+	<form name="myform">
+		<div class="box1">
+			구구단 학습하기
+		</div>
+		<div class="box2">
+			<select name="dan">
+				<option value="">단 선택</option>
+				<option value="2">2단</option>
+				<option value="3">3단</option>
+				<option value="4">4단</option>
+				<option value="5">5단</option>
+				<option value="6">6단</option>
+				<option value="7">7단</option>
+				<option value="8">8단</option>
+				<option value="9">9단</option>
+			</select>
+			<input type="button" value="단 보기" onclick="showDan();">
+			<input type="button" value="랜덤 보기" onclick="showRandom();">
+			<input type="button" value="지우기" onclick="clearDan();">
+		</div>
+
+		<div id="msg"></div>
+	</form>
+
+</body>
+</html>

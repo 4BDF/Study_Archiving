@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>구구단</title>
+	<style>
+		.box1{
+			border-radius: 10px;
+			border: 2px solid #73AD21;
+			background-color: #73AD21;
+			padding: 10px;
+			margin: 10px;
+			width: 400px;
+			height: 20px;
+			color: white;
+			text-align: center;
+		}
+		.box2{
+			margin: 10px;
+		}
+
+		#msg{
+			border: 1px solid #73AD21;
+			margin: 10px;
+			width: 400px;
+			height: 300px;
+			padding: 10px;
+			text-align: center;
+		}
+
+		.rdan{
+			font-size: 40px;
+			margin-top: 80px;
+			text-align: center;
+		}
+
+		img{
+			width: 60px;
+			height: 80px;
+		}
+
+		.card1 {
+			width: 50px;
+			height: 60px;
+			border: 2px solid #73AD21;
+			border-radius: 5px;
+			margin: 5px;
+			padding-top: 6px;
+			font-size: 25px;
+			float: left;
+		}
+
+		.card2 {
+			width: 50px;
+			height: 60px;
+			background-color: yellow;
+			border: 2px solid #73AD21;
+			border-radius: 5px;
+			margin: 5px;
+			padding-top: 6px;
+			font-size: 25px;
+			float: left;
+		}
+
+		.cardClear{
+			clear: both;
+		}
+	</style>
+
+	<script>
+		function showCard(){
+			//시작값, 종료값 입력 확인
+			if(myform.txt1.value == ""){
+				alert("시작값을 입력하세요.");
+				myform.txt1.focus();
+				return;
+			}
+
+			if(myform.txt2.value == ""){
+				alert("종료값을 입력하세요.");
+				myform.txt2.focus();
+				return;
+			}
+
+			//시작값이 종료값보다 큰 경우 두 숫자 바꾸기
+			var num1 = parseInt(myform.txt1.value);
+			var num2 = parseInt(myform.txt2.value);
+
+			if (num1 > num2) {
+				var temp = num1;
+				num1 = num2;
+				num2 = temp;
+			}
+
+			var str = "";
+			//카드 개수
+			var cnt = 0;
+			for (var i = num1; i <= num2; i++) {
+				cnt++;
+
+				if (i % 2 == 0) {
+					str = str + "<div class = 'card2'>" + i + "</div>";
+				}
+				else{
+					str = str + "<div class = 'card1'>" + i + "</div>";
+				}
+
+				//5개씩 보여주기
+				if (cnt % 5 == 0) {str = str + "<div class = 'cardClear'>" + "</div>";}
+			}
+
+			document.getElementById("msg").innerHTML = str;
+		}
+
+		function clearCard(){
+			myform.reset();
+			document.getElementById("msg").innerHTML = "";
+		}
+	</script>
+</head>
+<body>
+	<form name="myform">
+		<div class="box1">
+			카드 만들기
+		</div>
+		<div class="box2">
+			시작 <input type="text" name="txt1" size="6">
+			종료 <input type="text" name="txt2" size="6">
+			<input type="button" value="카드 보기" onclick="showCard();">
+			<input type="button" value="지우기" onclick="clearCard();">
+		</div>
+
+		<div id="msg"></div>
+	</form>
+
+</body>
+</html>
